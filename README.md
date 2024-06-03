@@ -70,7 +70,7 @@ sudo mkdir -p /etc/nginx/ssl/
 ```
 ### Lệnh tạo key:
 ```
-sudo openssl genpkey -algorithm RSA -out /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.com.key -pkeyopt rsa_keygen_bits:2048
+sudo openssl genpkey -algorithm RSA -out /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.key -pkeyopt rsa_keygen_bits:2048
 ```
 Kết quả:
 ```
