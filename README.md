@@ -145,34 +145,24 @@ Sau khi đã thực hiện các bước này, trang web của bạn sẽ đượ
 ### Cập nhật lại file cấu hình nginx:
 ```
 server {
+    if ($host = rpc.0gchain.josephtran.xyz) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
     listen 80;
     server_name rpc.0gchain.josephtran.xyz;
+    return 301 https://$host$request_uri;
 
-    location / {
-        return 301 https://$server_name$request_uri;
-    }
 
 }
 
 server {
     listen 443 ssl;
     server_name rpc.0gchain.josephtran.xyz;
+    ssl_certificate /etc/letsencrypt/live/rpc.0gchain.josephtran.xyz/fullchain.pem; # ma>
+    ssl_certificate_key /etc/letsencrypt/live/rpc.0gchain.josephtran.xyz/privkey.pem; # >
 
-    ssl_certificate /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.crt;
-    ssl_certificate_key /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.key;
-
-    # Các tùy chọn SSL khác
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers ECDH+AESGCM:ECDH+CHACHA20;
-    ssl_ecdh_curve X25519:sect571r1:secp521r1:secp384r1;
-    ssl_session_timeout  10m;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_tickets off;
-    ssl_stapling on;
-    ssl_stapling_verify on;
-    resolver 8.8.8.8 8.8.4.4 valid=300s;
-    resolver_timeout 5s;
 
     location / {
         proxy_pass http://localhost:26657;
@@ -181,6 +171,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
+
 }
 ```
 Reload lại nginx:
