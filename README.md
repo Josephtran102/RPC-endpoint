@@ -118,7 +118,7 @@ subject=C = VN, ST = HoChiMinh, L = HoChiMinh, O = JosephTran, CN = Joseph, emai
 ```
 ### Tạo chứng chỉ tự ký từ CSR:
 ```
-sudo openssl x509 -req -days 365 -in /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.csr -signkey /etc/nginx/ssl/rpc.0gchain.josephtran.xyz -out /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.crt
+sudo openssl x509 -req -days 365 -in /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.csr -signkey /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.key -out /etc/nginx/ssl/rpc.0gchain.josephtran.xyz.crt
 ```
 ## 5. Đăng ký và cấu hình chứng chỉ SSL miễn phí từ Let's Encrypt trên máy chủ:
 ### Cài đặt `Certbot`:
