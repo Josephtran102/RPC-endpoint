@@ -194,8 +194,7 @@ sudo iptables -A INPUT -p tcp --dport 8443 -j ACCEPT
 ```
 nano $HOME/.0gchain/config/app.toml
 ```
-Nội dung chỉnh sửa: đổi `address = "127.0.0.1:8545` thành `address = "0.0.0.0:8545` để có thể truy cập từ bên ngoài.
-**WebSocket không cần mở vì khá tốn tài nguyên*
+Nội dung chỉnh sửa: đổi `address = "127.0.0.1:8545` thành `address = "0.0.0.0:8545`
 ```
 ###############################################################################
 ###                           JSON RPC Configuration                        ###
@@ -223,7 +222,7 @@ api = "eth,txpool,personal,net,debug,web3"
 sudo systemctl restart ogd && sudo journalctl -u ogd -f -o cat
 ```
 
-### Tương tự như các bước trỏ subdomain cho RPC Cosmos:
+### Tương tự như các bước trỏ subdomain cho RPC 0g:
 Tạo server block mới (tên `evm.rpc.0gchain.josephtran.xyz`), đăng ký SSL, cấu hình file nginx,...
 
 File cấu hình nginx:
@@ -261,46 +260,6 @@ sudo systemctl reload nginx
 Nếu chưa được check xem cổng 443 đã mở chưa hoặc quy tắc tường lửa?:
 ```
 sudo ufw status
-```
-Kết quả:
-```
-Status: active
-
-To                         Action      From
---                         ------      ----
-22/tcp                     ALLOW       Anywhere                  
-26657                      ALLOW       Anywhere                  
-80/tcp                     ALLOW       Anywhere                  
-22656/tcp                  ALLOW       Anywhere                  
-22657/tcp                  ALLOW       Anywhere                  
-51656/tcp                  ALLOW       Anywhere                  
-51657/tcp                  ALLOW       Anywhere                  
-51658/tcp                  ALLOW       Anywhere                  
-51660/tcp                  ALLOW       Anywhere                  
-26656/tcp                  ALLOW       Anywhere                  
-8545/tcp                   ALLOW       Anywhere                  
-445/tcp                    ALLOW       Anywhere                  
-443/tcp                    ALLOW       Anywhere                  
-22/tcp (v6)                ALLOW       Anywhere (v6)             
-26657 (v6)                 ALLOW       Anywhere (v6)             
-80/tcp (v6)                ALLOW       Anywhere (v6)             
-22656/tcp (v6)             ALLOW       Anywhere (v6)             
-22657/tcp (v6)             ALLOW       Anywhere (v6)             
-51656/tcp (v6)             ALLOW       Anywhere (v6)             
-51657/tcp (v6)             ALLOW       Anywhere (v6)             
-51658/tcp (v6)             ALLOW       Anywhere (v6)             
-51660/tcp (v6)             ALLOW       Anywhere (v6)             
-26656/tcp (v6)             ALLOW       Anywhere (v6)             
-8545/tcp (v6)              ALLOW       Anywhere (v6)             
-445/tcp (v6)               ALLOW       Anywhere (v6)             
-443/tcp (v6)               ALLOW       Anywhere (v6)  
-```
-Nếu chưa mở thì có thể mở bằng:
-```
-sudo ufw allow 443/tcp
-```
-```
-sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 ```
 
 
